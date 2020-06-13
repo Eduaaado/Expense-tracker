@@ -5,6 +5,9 @@
     <string name="currency">R$</string>
     <string name="confirm">confirm</string>
     <string name="transaction_name_placeholder">Title</string>
+    <string name="dialog_add_budget_title">Add budget</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="arr_transaction_options">
         <item>Expense</item>

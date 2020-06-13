@@ -1,12 +1,15 @@
-package com.example.expensestracker;
+package com.example.expensestracker.views;
 
 import android.os.Bundle;
 
+import com.example.expensestracker.R;
+import com.example.expensestracker.dialogBox.addBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import android.view.View;
 import android.view.Menu;
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        DialogFragment newFragment = new addBudgetDialog();
+        newFragment.show(getSupportFragmentManager(), "add budget");
     }
 
     @Override
