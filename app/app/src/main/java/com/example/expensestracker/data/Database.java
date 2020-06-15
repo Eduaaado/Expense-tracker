@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -42,7 +43,7 @@ public class Database extends SQLiteOpenHelper {
         String sql;
 
         sql = "CREATE TABLE "+tb_BUDGET+" (\n" +
-                "    " + id_BUDGET + "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + id_BUDGET + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + tt_BUDGET + " INTEGER NOT NULL, \n" +
                 "    " + rt_BUDGET + " INTEGER NOT NULL, \n" +
                 "    " + rp_BUDGET + " INTEGER NOT NULL \n" +
@@ -50,7 +51,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(sql);
 
         sql = "CREATE TABLE "+tb_ENTRIES+" (\n" +
-                "    " + id_ENTRIES + "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + id_ENTRIES + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + nm_ENTRIES + " VARCHAR(100) NOT NULL,\n" +
                 "    " + rs_ENTRIES + " INTEGER NOT NULL,\n" +
                 "    " + tp_ENTRIES + " INTEGER NOT NULL,\n" +
@@ -82,16 +83,41 @@ public class Database extends SQLiteOpenHelper {
         return db.delete(tb_ENTRIES, id_ENTRIES + "=?", new String[] {String.valueOf(id)}) == 1;
     }
 
-    public boolean updateBudget(int val) {
+    public void increaseBudget(int val) {
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT "+tt_BUDGET+" FROM "+tb_BUDGET, null);
-        cursor.moveToFirst();
-        int total = cursor.getInt(1);
+        boolean empty = true;
+        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM "+tb_BUDGET, null);
+        if (cur != null && cur.moveToFirst()) {
+            empty = (cur.getInt (0) == 0);
+        } cur.close();
 
         ContentValues vals = new ContentValues();
-        vals.put(tt_BUDGET, total+val);
 
-        return db.update(tb_BUDGET, vals, id_BUDGET + "=?", new String[] {"0"}) == 1;
+        if (!empty) {
+            Cursor cursor = db.rawQuery("SELECT "+tt_BUDGET+" FROM "+tb_BUDGET, null);
+            cursor.moveToFirst();
+            int total = cursor.getInt(0);
+            cursor.close();
+
+            int newtotal = total+val;
+            Log.d("NEW TOTAL", String.valueOf(newtotal));
+            vals.put(tt_BUDGET, newtotal);
+
+            db.update(tb_BUDGET, vals, id_BUDGET + "=?", new String[] {"1"});
+        } else {
+            vals.put(tt_BUDGET, val);
+            vals.put(rt_BUDGET, 0);
+            vals.put(rp_BUDGET, 0);
+
+            db.insert(tb_BUDGET, null, vals);
+        }
+    }
+
+    public int getTotalBudget() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+tt_BUDGET+" FROM "+tb_BUDGET, null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
     }
 }

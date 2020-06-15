@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.expensestracker.R;
+import com.example.expensestracker.data.Database;
 import com.example.expensestracker.dialogBox.addBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    Database mDatabase;
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mDatabase = new Database(this);
 
         this.mViewHolder.txtBudgetInt = findViewById(R.id.txt_budget_integers);
         this.mViewHolder.txtBudgetDec = findViewById(R.id.txt_budget_decimal);
@@ -53,6 +57,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            this.mViewHolder.txtBudgetInt.setText(String.valueOf(mDatabase.getTotalBudget()));
+        } catch (Exception e) {
+            this.mViewHolder.txtBudgetInt.setText("0");
+        }
     }
 
     @Override
