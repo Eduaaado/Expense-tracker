@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.expensestracker.R;
+import com.example.expensestracker.adapter.EntryAdapter;
+import com.example.expensestracker.adapter.EntryDetails;
 import com.example.expensestracker.data.Database;
 import com.example.expensestracker.dialogBox.addBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,12 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             this.mViewHolder.txtBudgetInt.setText("0");
         }
+
+        String[][] entries = mDatabase.getEntries();
+
+        // Construct the data source
+        ArrayList<EntryDetails> entryList = new ArrayList<EntryDetails>();
+
+        for (int i = 0; i < entries.length; i++) {
+            EntryDetails details = new EntryDetails(entries[i][0], entries[i][1], entries[i][2], entries[i][3]);
+            entryList.add(details);
+        }
+
+        // Create the adapter to convert the array to views
+        EntryAdapter adapter = new EntryAdapter(this, entryList);
+        // Attach the adapter to a ListView
+        this.mViewHolder.lstTransactions.setAdapter(adapter);
     }
 
     @Override

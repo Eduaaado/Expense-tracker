@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Database extends SQLiteOpenHelper {
@@ -53,8 +54,8 @@ public class Database extends SQLiteOpenHelper {
         sql = "CREATE TABLE "+tb_ENTRIES+" (\n" +
                 "    " + id_ENTRIES + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + nm_ENTRIES + " VARCHAR(100) NOT NULL,\n" +
-                "    " + rs_ENTRIES + " INTEGER NOT NULL,\n" +
-                "    " + tp_ENTRIES + " INTEGER NOT NULL,\n" +
+                "    " + rs_ENTRIES + " VARCHAR(100) NOT NULL,\n" +
+                "    " + tp_ENTRIES + " VARCHAR(100) NOT NULL,\n" +
                 "    " + tm_ENTRIES + " VARCHAR(100) NOT NULL\n" +
                 ");";
         db.execSQL(sql);
@@ -67,7 +68,7 @@ public class Database extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addEntry(String name, int amount, int type) {
+    public boolean addEntry(String name, String amount, String type) {
         ContentValues vals = new ContentValues();
         vals.put(nm_ENTRIES, name);
         vals.put(rs_ENTRIES, amount);
@@ -76,6 +77,23 @@ public class Database extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(tb_ENTRIES, null, vals) == 1;
+    }
+
+    public String[][] getEntries() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[][] entry = new String[0][];
+        String[] details;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES, null);
+        if (cursor.moveToFirst()) {
+            do {
+                details = new String[] {cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)};
+                entry = Arrays.copyOf(entry, entry.length+1);
+                entry[entry.length-1] = details;
+            } while (cursor.moveToNext());
+        }
+        return entry;
     }
 
     public boolean deleteEntry(int id) {

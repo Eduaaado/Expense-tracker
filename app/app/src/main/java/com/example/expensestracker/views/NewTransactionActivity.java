@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.expensestracker.R;
+import com.example.expensestracker.data.Database;
 
 public class NewTransactionActivity extends AppCompatActivity {
 
+    Database mDatabase = new Database(this);
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
@@ -29,7 +31,11 @@ public class NewTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Create Entry
+                String title = mViewHolder.editTransTitle.getText().toString();
+                String amount = mViewHolder.editTransAmount.getText().toString();
+                String type = String.valueOf(mViewHolder.spinTransType.getSelectedItemId());
+
+                mDatabase.addEntry(title, amount, type);
 
                 finish();
             }
