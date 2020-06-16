@@ -88,7 +88,7 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES, null);
         if (cursor.moveToFirst()) {
             do {
-                details = new String[] {cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)};
+                details = new String[] {cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(0)};
                 entry = Arrays.copyOf(entry, entry.length+1);
                 entry[entry.length-1] = details;
             } while (cursor.moveToNext());
