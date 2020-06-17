@@ -1,6 +1,7 @@
 package com.example.expensestracker.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,12 @@ public class NewTransactionActivity extends AppCompatActivity {
                 String type = String.valueOf(mViewHolder.spinTransType.getSelectedItemId());
 
                 mDatabase.addEntry(title, amount, type);
+
+                int add = Integer.parseInt(amount);
+                if (Integer.parseInt(type) == 0) {
+                    add *= -1;
+                }
+                mDatabase.increaseBudget(add);
 
                 finish();
             }

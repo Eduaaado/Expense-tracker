@@ -98,6 +98,12 @@ public class Database extends SQLiteOpenHelper {
 
     public boolean deleteEntry(int id) {
         SQLiteDatabase db = getWritableDatabase();
+        String[][] entries = getEntries();
+
+        int remove = Integer.parseInt(entries[0][1]);
+        if (Integer.parseInt(entries[0][2]) == 1) { remove *= -1; }
+        increaseBudget(remove);
+
         return db.delete(tb_ENTRIES, id_ENTRIES + "=?", new String[] {String.valueOf(id)}) == 1;
     }
 
