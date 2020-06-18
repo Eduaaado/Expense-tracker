@@ -3,10 +3,13 @@ package com.example.expensestracker.dialogBox;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -39,12 +42,14 @@ public class addBudgetDialog extends DialogFragment {
                        int i = Integer.parseInt(txt);
                        mDatabase.increaseBudget(i);
 
+                       TextView txtBudget = ((MainActivity)getActivity()).findViewById(R.id.txt_budget_integers);
+                       txtBudget.setText(String.valueOf(mDatabase.getTotalBudget()));
                    }
                })
 
                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-
+                        //cancel
                    }
                });
         // Create the AlertDialog object and return it

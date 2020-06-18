@@ -70,7 +70,16 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         try {
-            this.mViewHolder.txtBudgetInt.setText(String.valueOf(mDatabase.getTotalBudget()));
+            int money = mDatabase.getTotalBudget();
+            this.mViewHolder.txtBudgetInt.setText(String.valueOf(money));
+            if (money > 0) {
+                this.mViewHolder.txtBudgetInt.setTextColor(getResources().getColor(R.color.moneyPositive));
+                this.mViewHolder.txtBudgetDec.setTextColor(getResources().getColor(R.color.moneyPositive));
+            } else {
+                this.mViewHolder.txtBudgetInt.setTextColor(getResources().getColor(R.color.moneyNegative));
+                this.mViewHolder.txtBudgetDec.setTextColor(getResources().getColor(R.color.moneyNegative));
+            }
+
         } catch (Exception e) {
             this.mViewHolder.txtBudgetInt.setText("0");
         }

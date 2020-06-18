@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.example.expensestracker.R;
 import com.example.expensestracker.data.Database;
+import com.example.expensestracker.views.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EntryAdapter extends ArrayAdapter<EntryDetails> {
 
@@ -19,6 +21,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
 
     private static class ViewHolder {
         TextView txtName;
+        TextView txtCurrency;
         TextView txtAmount;
         TextView txtType;
         TextView txtTime;
@@ -39,6 +42,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_entry_transaction, parent, false);
 
             mViewHolder.txtName = convertView.findViewById(R.id.txt_entry_name);
+            mViewHolder.txtCurrency = convertView.findViewById(R.id.txt_entry_currencysymbol);
             mViewHolder.txtAmount = convertView.findViewById(R.id.txt_entry_amount);
             mViewHolder.txtType = convertView.findViewById(R.id.txt_entry_type);
             mViewHolder.txtTime = convertView.findViewById(R.id.txt_entry_time);
@@ -51,7 +55,15 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
 
         mViewHolder.txtName.setText(details.name);
         mViewHolder.txtAmount.setText(details.amount);
-        mViewHolder.txtType.setText(details.type);
+
+        if (Integer.parseInt(details.type) == 0) {
+            mViewHolder.txtCurrency.setText("-R$ ");
+            mViewHolder.txtType.setText("Expense");
+        } else {
+            mViewHolder.txtCurrency.setText("R$ ");
+            mViewHolder.txtType.setText("Income");
+        }
+
         mViewHolder.txtTime.setText(details.time);
 
         String[][] entries = mDatabase.getEntries();

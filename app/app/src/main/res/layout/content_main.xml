@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColorLight"
         android:text="Budget:" />
 
     <LinearLayout
@@ -22,22 +23,31 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/textColorMain"
                 android:text="@string/currency" />
+
             <TextView
                 android:id="@+id/txt_budget_integers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/textColorMain"
                 android:text="0"
                 android:textSize="42sp" />
+
             <TextView
                 android:id="@+id/txt_budget_decimal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
                 android:text=",00"
-                android:textSize="24sp"/>
+                android:textColor="@color/textColorMain"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,16 +59,24 @@
                 android:id="@+id/btn_budget_edit"
                 android:layout_weight="1"
                 android:layout_width="1dp"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:text="edit"/>
+                android:layout_marginRight="8dp"
+                android:text="@string/edit"
+                android:textColor="@color/textColorAlt"
+                android:background="@drawable/buttons_design" />
+
             <Button
                 android:id="@+id/btn_budget_add"
                 android:layout_weight="1"
                 android:layout_width="1dp"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:text="add"/>
+                android:gravity="center"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/buttons_design"
+                android:text="@string/add"
+                android:textColor="@color/textColorAlt"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -68,6 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Transactions"
+        android:textColor="@color/textColorMain"
+        android:layout_marginBottom="24dp"
         android:textSize="24sp" />
 
     <ListView

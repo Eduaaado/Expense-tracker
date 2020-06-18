@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -73,7 +74,10 @@ public class Database extends SQLiteOpenHelper {
         vals.put(nm_ENTRIES, name);
         vals.put(rs_ENTRIES, amount);
         vals.put(tp_ENTRIES, type);
-        vals.put(tm_ENTRIES, String.valueOf(Calendar.getInstance().getTime()));
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        vals.put(tm_ENTRIES, sdf.format(c.getTime()));
 
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(tb_ENTRIES, null, vals) == 1;
@@ -86,12 +90,12 @@ public class Database extends SQLiteOpenHelper {
         String[] details;
 
         Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES, null);
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToLast()) {
             do {
                 details = new String[] {cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(0)};
                 entry = Arrays.copyOf(entry, entry.length+1);
                 entry[entry.length-1] = details;
-            } while (cursor.moveToNext());
+            } while (cursor.moveToPrevious());
         }
         return entry;
     }

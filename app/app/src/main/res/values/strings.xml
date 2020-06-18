@@ -8,6 +8,7 @@
     <string name="dialog_add_budget_title">Add budget</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="edit">edit</string>
 
     <string-array name="arr_transaction_options">
         <item>Expense</item>
