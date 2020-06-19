@@ -104,7 +104,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[][] entries = getEntries();
 
-        int remove = Integer.parseInt(entries[0][1]);
+        float remove = Float.parseFloat(entries[0][1]);
         if (Integer.parseInt(entries[0][2]) == 1) { remove *= -1; }
         increaseBudget(remove);
 
