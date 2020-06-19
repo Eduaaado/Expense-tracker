@@ -57,10 +57,10 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         mViewHolder.txtAmount.setText(details.amount);
 
         if (Integer.parseInt(details.type) == 0) {
-            mViewHolder.txtCurrency.setText("-R$ ");
+            String txtCurr = (String) mViewHolder.txtCurrency.getText();
+            if (txtCurr.indexOf("-") == -1) { mViewHolder.txtCurrency.setText("-"+txtCurr); }
             mViewHolder.txtType.setText("Expense");
         } else {
-            mViewHolder.txtCurrency.setText("R$ ");
             mViewHolder.txtType.setText("Income");
         }
 

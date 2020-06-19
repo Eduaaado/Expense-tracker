@@ -46,7 +46,7 @@ public class Database extends SQLiteOpenHelper {
 
         sql = "CREATE TABLE "+tb_BUDGET+" (\n" +
                 "    " + id_BUDGET + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-                "    " + tt_BUDGET + " INTEGER NOT NULL, \n" +
+                "    " + tt_BUDGET + " REAL NOT NULL, \n" +
                 "    " + rt_BUDGET + " INTEGER NOT NULL, \n" +
                 "    " + rp_BUDGET + " INTEGER NOT NULL \n" +
                 ");";
@@ -111,13 +111,13 @@ public class Database extends SQLiteOpenHelper {
         return db.delete(tb_ENTRIES, id_ENTRIES + "=?", new String[] {String.valueOf(id)}) == 1;
     }
 
-    public void increaseBudget(int val) {
+    public void increaseBudget(float val) {
         SQLiteDatabase db = getWritableDatabase();
 
         boolean empty = true;
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM "+tb_BUDGET, null);
         if (cur != null && cur.moveToFirst()) {
-            empty = (cur.getInt (0) == 0);
+            empty = (cur.getFloat(0) == 0);
         } cur.close();
 
         ContentValues vals = new ContentValues();
@@ -125,10 +125,10 @@ public class Database extends SQLiteOpenHelper {
         if (!empty) {
             Cursor cursor = db.rawQuery("SELECT "+tt_BUDGET+" FROM "+tb_BUDGET, null);
             cursor.moveToFirst();
-            int total = cursor.getInt(0);
+            float total = cursor.getFloat(0);
             cursor.close();
 
-            int newtotal = total+val;
+            float newtotal = total+val;
             Log.d("NEW TOTAL", String.valueOf(newtotal));
             vals.put(tt_BUDGET, newtotal);
 
@@ -142,10 +142,12 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    public int getTotalBudget() {
+    public float getTotalBudget() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+tt_BUDGET+" FROM "+tb_BUDGET, null);
         cursor.moveToFirst();
-        return cursor.getInt(0);
+        float total = cursor.getFloat(0);
+        Log.d("RETURNED TOTAL BUDGET", String.valueOf(total));
+        return total;
     }
 }

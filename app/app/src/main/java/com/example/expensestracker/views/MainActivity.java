@@ -70,8 +70,17 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         try {
-            int money = mDatabase.getTotalBudget();
-            this.mViewHolder.txtBudgetInt.setText(String.valueOf(money));
+            float money = mDatabase.getTotalBudget();
+            String strMoney = String.valueOf(money);
+
+            int indexOfDecimal = strMoney.indexOf(".");
+            String moneyInt = strMoney.substring(0, indexOfDecimal);
+            String moneyDec = strMoney.substring(indexOfDecimal);
+
+            this.mViewHolder.txtBudgetInt.setText(moneyInt);
+            if (moneyDec.length() == 2) { moneyDec = moneyDec+"0"; }
+            this.mViewHolder.txtBudgetDec.setText(moneyDec);
+
             if (money > 0) {
                 this.mViewHolder.txtBudgetInt.setTextColor(getResources().getColor(R.color.moneyPositive));
                 this.mViewHolder.txtBudgetDec.setTextColor(getResources().getColor(R.color.moneyPositive));

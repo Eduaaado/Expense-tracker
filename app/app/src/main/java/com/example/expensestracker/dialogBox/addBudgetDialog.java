@@ -39,7 +39,7 @@ public class addBudgetDialog extends DialogFragment {
                .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        String txt = amount.getText().toString();
-                       int i = Integer.parseInt(txt);
+                       float i = Float.parseFloat(txt);
                        mDatabase.increaseBudget(i);
 
                        TextView txtBudget = ((MainActivity)getActivity()).findViewById(R.id.txt_budget_integers);

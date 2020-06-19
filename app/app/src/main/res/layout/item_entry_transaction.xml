@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColorMain"
             android:textStyle="bold"
+            android:textSize="14sp"
             android:text="Name" />
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColorLight"
             android:textSize="12sp"
-            android:text="R$ " />
+            android:text="@string/currency" />
 
         <TextView
             android:id="@+id/txt_entry_amount"
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryLight"
             android:textStyle="bold"
+            android:textSize="18sp"
             android:text="Amount" />
 
         <TextView
@@ -67,8 +69,8 @@
 
         <Button
             android:id="@+id/btn_entry_delete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:background="@drawable/ic_delete_24"
             android:backgroundTint="@color/colorPrimaryDark"/>
 

@@ -38,7 +38,7 @@ public class NewTransactionActivity extends AppCompatActivity {
 
                 mDatabase.addEntry(title, amount, type);
 
-                int add = Integer.parseInt(amount);
+                float add = Float.parseFloat(amount);
                 if (Integer.parseInt(type) == 0) {
                     add *= -1;
                 }
