@@ -13,14 +13,12 @@
         android:textColor="@color/textColorLight"
         android:text="Budget:" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="60dp">
 
         <LinearLayout
-            android:layout_weight="3"
-            android:layout_width="1dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -49,37 +47,17 @@
                 android:textColor="@color/textColorMain"
                 android:textSize="24sp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="2"
-            android:layout_width="1dp"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btn_budget_edit"
-                android:layout_weight="1"
-                android:layout_width="1dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="8dp"
-                android:text="@string/edit"
-                android:textColor="@color/textColorAlt"
-                android:background="@drawable/buttons_design" />
-
-            <Button
-                android:id="@+id/btn_budget_add"
-                android:layout_weight="1"
-                android:layout_width="1dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/buttons_design"
-                android:text="@string/add"
-                android:textColor="@color/textColorAlt"/>
-
-        </LinearLayout>
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_budget_edit"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/buttons_circle"
+            android:paddingTop="8dp"
+            android:drawableTop="@drawable/ic_edit_24"
+            android:textColor="@color/textColorAlt" />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

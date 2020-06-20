@@ -7,19 +7,16 @@ import com.example.expensestracker.R;
 import com.example.expensestracker.adapter.EntryAdapter;
 import com.example.expensestracker.adapter.EntryDetails;
 import com.example.expensestracker.data.Database;
-import com.example.expensestracker.dialogBox.addBudgetDialog;
+import com.example.expensestracker.dialogBox.editBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.txtBudgetInt = findViewById(R.id.txt_budget_integers);
         this.mViewHolder.txtBudgetDec = findViewById(R.id.txt_budget_decimal);
         this.mViewHolder.btnBudgetEdit = findViewById(R.id.btn_budget_edit);
-        this.mViewHolder.btnBudgetAdd = findViewById(R.id.btn_budget_add);
         this.mViewHolder.lstTransactions = findViewById(R.id.list_transactions);
 
         this.mViewHolder.fab = findViewById(R.id.fab);
@@ -55,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.mViewHolder.btnBudgetAdd.setOnClickListener(new View.OnClickListener() {
+        this.mViewHolder.btnBudgetEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new addBudgetDialog();
+                DialogFragment newFragment = new editBudgetDialog();
                 newFragment.show(getSupportFragmentManager(), "add budget");
             }
         });

@@ -104,7 +104,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[][] entries = getEntries();
 
-        float remove = Float.parseFloat(entries[0][1]);
+        float remove = Float.parseFloat(entries[0][1].replace(",",""));
         if (Integer.parseInt(entries[0][2]) == 1) { remove *= -1; }
         increaseBudget(remove);
 
@@ -140,6 +140,25 @@ public class Database extends SQLiteOpenHelper {
 
             db.insert(tb_BUDGET, null, vals);
         }
+    }
+
+    public void editBudget(float val) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        boolean empty = true;
+        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM "+tb_BUDGET, null);
+        if (cur != null && cur.moveToFirst()) {
+            empty = (cur.getFloat(0) == 0);
+        } cur.close();
+
+        ContentValues vals = new ContentValues();
+        if (!empty) {
+            vals.put(tt_BUDGET, val);
+            db.update(tb_BUDGET, vals, id_BUDGET + "=?", new String[] {"1"});
+        } else {
+            db.insert(tb_BUDGET, null, vals);
+        }
+
     }
 
     public float getTotalBudget() {
