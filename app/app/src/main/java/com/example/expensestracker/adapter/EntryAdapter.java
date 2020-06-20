@@ -18,6 +18,7 @@ import java.util.Date;
 public class EntryAdapter extends ArrayAdapter<EntryDetails> {
 
     Database mDatabase = new Database(getContext());
+    private Context mContext;
 
     private static class ViewHolder {
         TextView txtName;
@@ -30,11 +31,13 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
 
     public EntryAdapter(Context context, ArrayList<EntryDetails> details) {
         super(context, 0, details);
+
+        this.mContext = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        EntryDetails details = getItem(position);
+        final EntryDetails details = getItem(position);
 
         ViewHolder mViewHolder;
         if (convertView == null) {
@@ -74,8 +77,11 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             public void onClick(View v) {
                 int position = Integer.parseInt(String.valueOf(v.getTag()));
                 mDatabase.deleteEntry(position);
+                remove(details);
+                ((MainActivity)mContext).updateBudgetDisplay();
             }
         });
+        mViewHolder.btnDelete.setId(position);
 
         return convertView;
     }

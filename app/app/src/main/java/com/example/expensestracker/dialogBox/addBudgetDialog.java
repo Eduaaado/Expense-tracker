@@ -42,8 +42,7 @@ public class addBudgetDialog extends DialogFragment {
                        float i = Float.parseFloat(txt);
                        mDatabase.increaseBudget(i);
 
-                       TextView txtBudget = ((MainActivity)getActivity()).findViewById(R.id.txt_budget_integers);
-                       txtBudget.setText(String.valueOf(mDatabase.getTotalBudget()));
+                       ((MainActivity)getActivity()).updateBudgetDisplay();
                    }
                })
 

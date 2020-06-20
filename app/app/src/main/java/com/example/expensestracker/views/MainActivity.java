@@ -69,6 +69,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        updateBudgetDisplay();
+
+        String[][] entries = mDatabase.getEntries();
+
+        // Construct the data source
+        ArrayList<EntryDetails> entryList = new ArrayList<EntryDetails>();
+
+        for (int i = 0; i < entries.length; i++) {
+            EntryDetails details = new EntryDetails(entries[i][0], entries[i][1], entries[i][2], entries[i][3]);
+            entryList.add(details);
+        }
+
+        // Create the adapter to convert the array to views
+        EntryAdapter adapter = new EntryAdapter(this, entryList);
+        // Attach the adapter to a ListView
+        this.mViewHolder.lstTransactions.setAdapter(adapter);
+    }
+
+    public void updateBudgetDisplay() {
         try {
             float money = mDatabase.getTotalBudget();
             String strMoney = String.valueOf(money);
@@ -92,21 +111,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             this.mViewHolder.txtBudgetInt.setText("0");
         }
-
-        String[][] entries = mDatabase.getEntries();
-
-        // Construct the data source
-        ArrayList<EntryDetails> entryList = new ArrayList<EntryDetails>();
-
-        for (int i = 0; i < entries.length; i++) {
-            EntryDetails details = new EntryDetails(entries[i][0], entries[i][1], entries[i][2], entries[i][3]);
-            entryList.add(details);
-        }
-
-        // Create the adapter to convert the array to views
-        EntryAdapter adapter = new EntryAdapter(this, entryList);
-        // Attach the adapter to a ListView
-        this.mViewHolder.lstTransactions.setAdapter(adapter);
     }
 
     @Override
