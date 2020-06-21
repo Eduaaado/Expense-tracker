@@ -9,9 +9,18 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="edit">Edit</string>
+    <string name="theme">Theme</string>
+    <string name="ok">Ok</string>
+    <string name="choose_theme">Choose theme</string>
 
     <string-array name="arr_transaction_options">
         <item>Expense</item>
         <item>Income</item>
+    </string-array>
+
+    <string-array name="arr_theme_options">
+        <item>System default</item>
+        <item>Light</item>
+        <item>Dark</item>
     </string-array>
 </resources>

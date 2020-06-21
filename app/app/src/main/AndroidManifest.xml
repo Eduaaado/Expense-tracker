@@ -21,8 +21,12 @@
 
         <activity
             android:name=".views.NewTransactionActivity"
-            android:label="New transaction"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/new_transaction_header"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".views.SettingsActivity"
+            android:label="Settings"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

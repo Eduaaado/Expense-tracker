@@ -40,15 +40,22 @@ public class editBudgetDialog extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         View mView = inflater.inflate(R.layout.dialog_add_budget, null);
         final EditText amount = mView.findViewById(R.id.edit_budget_to_add);
-        amount.setText(String.valueOf(mDatabase.getTotalBudget()));
+        String tt;
+        try {
+            tt = String.valueOf(mDatabase.getTotalBudget());
+        } catch (Exception e) {
+            tt = "0";
+        }
+        amount.setText(tt);
 
+        final String finalTt = tt;
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //
             }
 
-            private String current = String.valueOf(mDatabase.getTotalBudget());
+            private String current = finalTt;
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(!s.toString().equals(current)){
