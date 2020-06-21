@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#344955</color>
+    <color name="colorPrimaryDark">#232f34</color>
+    <color name="colorPrimaryLight">#7AA4B8</color>
+
+    <color name="colorAccent">#f9aa33</color>
+
+    <color name="textColorMain">#ffffff</color>
+    <color name="textColorLight">#9F9F9F</color>
+    <color name="textColorAlt">#222222</color>
+
+    <color name="background">#141A1C</color>
+
+    <color name="moneyPositive">#4ADD45</color>
+    <color name="moneyNegative">#EC1313</color>
+</resources>

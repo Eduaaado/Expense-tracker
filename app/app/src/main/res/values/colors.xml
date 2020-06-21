@@ -10,6 +10,8 @@
     <color name="textColorLight">#323232</color>
     <color name="textColorAlt">#ffffff</color>
 
+    <color name="background">#ffffff</color>
+
     <color name="moneyPositive">#058C00</color>
     <color name="moneyNegative">#bf0000</color>
 </resources>

@@ -72,7 +72,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_delete_24"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            android:backgroundTint="@color/colorPrimaryLight"/>
 
     </LinearLayout>
 
