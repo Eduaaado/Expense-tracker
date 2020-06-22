@@ -35,6 +35,7 @@ public class NewTransactionActivity extends AppCompatActivity {
         this.mViewHolder.spinTransType = findViewById(R.id.spin_transaction_type);
         this.mViewHolder.btnTransConfirm = findViewById(R.id.btn_transaction_confirm);
 
+        // Format Edit area to money format ($X.yy)
         this.mViewHolder.editTransAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -46,22 +47,29 @@ public class NewTransactionActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(!s.toString().equals(current)){
+                    // Remove listener to avoid infinite loop
                     mViewHolder.editTransAmount.removeTextChangedListener(this);
 
                     String cleanString = s.toString().replaceAll("[$,.]", "");
 
+                    // Sets formatter
                     DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
                     DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+                    // Remove Currency symbol
                     symbols.setCurrencySymbol("");
                     formatter.setDecimalFormatSymbols(symbols);
 
+                    // Formats string
                     double parsed = Double.parseDouble(cleanString);
                     String formatted = formatter.format((parsed/100));
 
+                    // Set text to line
                     current = formatted;
                     mViewHolder.editTransAmount.setText(formatted);
                     mViewHolder.editTransAmount.setSelection(formatted.length());
 
+                    // Put listener back
                     mViewHolder.editTransAmount.addTextChangedListener(this);
                 }
 
@@ -77,18 +85,26 @@ public class NewTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // Get inputs
                 String title = mViewHolder.editTransTitle.getText().toString();
                 String amount = mViewHolder.editTransAmount.getText().toString();
                 String type = String.valueOf(mViewHolder.spinTransType.getSelectedItemId());
 
+                // Log new transaction
                 mDatabase.addEntry(title, amount, type);
 
+                // Remove any unnecessary char
                 float add = Float.parseFloat(amount.replace(",",""));
+
+                // Checks if it's expense or income
                 if (Integer.parseInt(type) == 0) {
                     add *= -1;
                 }
+
+                // Updates budget
                 mDatabase.increaseBudget(add);
 
+                // Exit transactions activity
                 finish();
             }
         });

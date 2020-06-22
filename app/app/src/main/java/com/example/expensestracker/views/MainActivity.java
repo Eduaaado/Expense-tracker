@@ -26,6 +26,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * <h1>Expense Tracker</h1>
+ * The Expense Tracker app allows you to
+ * keep tracking of your money and budget every day.
+ *
+ * <b>Note:</b> The app is still in development, and may be buggy, so
+ * feel free to open an Issue reporting any error or request a feature.
+ *
+ * @author Eduardo Rodrigues
+ * @version 1.0.0-alpha
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     Database mDatabase;
@@ -36,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Checks for theme settings option
         SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         switch (prefs.getInt("theme", 0)) {
             case 1:
@@ -56,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.lstTransactions = findViewById(R.id.list_transactions);
 
         this.mViewHolder.fab = findViewById(R.id.fab);
+
+
+        // Click events
+
         this.mViewHolder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.btnBudgetEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Open dialog box to edit budget
                 DialogFragment newFragment = new editBudgetDialog();
                 newFragment.show(getSupportFragmentManager(), "add budget");
             }
@@ -96,19 +114,31 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.lstTransactions.setAdapter(adapter);
     }
 
+    /**
+     * This method is used to update the budget text
+     * every time a new value is assigned to the total budget
+     *
+     * @return Nothing.
+     */
     public void updateBudgetDisplay() {
         try {
             float money = mDatabase.getTotalBudget();
             String strMoney = String.valueOf(money);
 
+            // Separates Integer part and Decimal part
+            // Example: 14.50 turns into X = 14 and Y = .50
             int indexOfDecimal = strMoney.indexOf(".");
             String moneyInt = strMoney.substring(0, indexOfDecimal);
             String moneyDec = strMoney.substring(indexOfDecimal);
 
-            this.mViewHolder.txtBudgetInt.setText(moneyInt);
+            // Handles case of missing decimal at the end
             if (moneyDec.length() == 2) { moneyDec = moneyDec+"0"; }
+
+            // Sets text to view
+            this.mViewHolder.txtBudgetInt.setText(moneyInt);
             this.mViewHolder.txtBudgetDec.setText(moneyDec);
 
+            // Sets correct color
             if (money > 0) {
                 this.mViewHolder.txtBudgetInt.setTextColor(getResources().getColor(R.color.moneyPositive));
                 this.mViewHolder.txtBudgetDec.setTextColor(getResources().getColor(R.color.moneyPositive));
@@ -118,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } catch (Exception e) {
+            // This will be executed if there is no budget in Database
             this.mViewHolder.txtBudgetInt.setText("0");
         }
     }

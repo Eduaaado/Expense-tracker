@@ -26,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
         this.mViewHolder.chooseTheme = findViewById(R.id.area_theme);
         this.mViewHolder.txtThemeOption = findViewById(R.id.txt_theme_option);
 
+        // Set current options to View
         SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         int idTheme = prefs.getInt("theme", 0);
         String[] themestext = getResources().getStringArray(R.array.arr_theme_options);
@@ -34,12 +35,18 @@ public class SettingsActivity extends AppCompatActivity {
         this.mViewHolder.chooseTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Opens dialog box to choose a theme
                 DialogFragment newFragment = new ThemeDialog();
                 newFragment.show(getSupportFragmentManager(), "theme");
             }
         });
     }
 
+    /**
+     * Checks the chosen theme.
+     *
+     * @return Nothing.
+     */
     public void checkTheme() {
         switch (getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("theme", 0)) {
             case 1:

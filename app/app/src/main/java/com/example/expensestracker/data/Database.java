@@ -69,6 +69,15 @@ public class Database extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * This method insert a new entry to the database.
+     *
+     * @param name
+     * @param amount
+     * @param type
+     * @return boolean Returns {@code true} if successfully inserted
+     */
+
     public boolean addEntry(String name, String amount, String type) {
         ContentValues vals = new ContentValues();
         vals.put(nm_ENTRIES, name);
@@ -82,6 +91,13 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(tb_ENTRIES, null, vals) == 1;
     }
+
+    /**
+     * Get every entry and converts to {@code String[][]}
+     * in the following pattern: {@code { [name], [amount], [type], [time], [id] }}.
+     *
+     * @return String[][] Transaction entries
+     */
 
     public String[][] getEntries() {
         SQLiteDatabase db = getReadableDatabase();
@@ -100,6 +116,13 @@ public class Database extends SQLiteOpenHelper {
         return entry;
     }
 
+    /**
+     * Deletes entry in database with the passed {@code id}.
+     *
+     * @param id
+     * @return boolean Returns {@code true} if successfully deleted
+     */
+
     public boolean deleteEntry(int id) {
         SQLiteDatabase db = getWritableDatabase();
         String[][] entries = getEntries();
@@ -110,6 +133,14 @@ public class Database extends SQLiteOpenHelper {
 
         return db.delete(tb_ENTRIES, id_ENTRIES + "=?", new String[] {String.valueOf(id)}) == 1;
     }
+
+    /**
+     * Sum {@code val} to current total budget and
+     * updates it to summed value.
+     *
+     * @param val
+     * @return Nothing.
+     */
 
     public void increaseBudget(float val) {
         SQLiteDatabase db = getWritableDatabase();
@@ -142,6 +173,13 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Changes total budget to new {@code val}.
+     *
+     * @param val
+     * @return Nothing.
+     */
+
     public void editBudget(float val) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -160,6 +198,12 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+
+    /**
+     * Gets total budget float value from database.
+     *
+     * @return float Returns total budget
+     */
 
     public float getTotalBudget() {
         SQLiteDatabase db = getReadableDatabase();
