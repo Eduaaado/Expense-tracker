@@ -1,6 +1,7 @@
 package com.example.expensestracker.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,11 +60,12 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         mViewHolder.txtName.setText(details.name);
         mViewHolder.txtAmount.setText(details.amount);
 
+        String txtCurr = (String) mViewHolder.txtCurrency.getText();
         if (Integer.parseInt(details.type) == 0) {
-            String txtCurr = (String) mViewHolder.txtCurrency.getText();
             if (txtCurr.indexOf("-") == -1) { mViewHolder.txtCurrency.setText("-"+txtCurr); }
             mViewHolder.txtType.setText("Expense");
         } else {
+            mViewHolder.txtCurrency.setText(txtCurr.replace("-",""));
             mViewHolder.txtType.setText("Income");
         }
 
@@ -76,8 +78,10 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             @Override
             public void onClick(View v) {
                 int position = Integer.parseInt(String.valueOf(v.getTag()));
+                Log.d("POSITION", String.valueOf(position));
                 mDatabase.deleteEntry(position);
                 remove(details);
+                notifyDataSetChanged();
                 ((MainActivity)mContext).updateBudgetDisplay();
             }
         });

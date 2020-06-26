@@ -125,10 +125,27 @@ public class Database extends SQLiteOpenHelper {
 
     public boolean deleteEntry(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        String[][] entries = getEntries();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES, null);
 
-        float remove = Float.parseFloat(entries[0][1].replace(",",""));
-        if (Integer.parseInt(entries[0][2]) == 1) { remove *= -1; }
+        int idd = -1;
+        String[][] entries = getEntries();
+        for (String[] ob : entries) {
+            idd = Arrays.asList(ob).indexOf(String.valueOf(id));
+            Log.d("IDD", String.valueOf(idd));
+            if (idd != -1) {
+                idd = Arrays.asList(entries).indexOf(ob);
+                break;
+            }
+        }
+        if (idd == -1) return false;
+
+        Log.d("ID ON LIST", String.valueOf(idd));
+
+        cursor.moveToPosition(idd);
+
+        float remove = Float.parseFloat(entries[idd][1].replace(",",""));
+        Log.d("REMOVE FROM BUDGET", String.valueOf(remove));
+        if (Integer.parseInt(entries[idd][2]) == 1) { remove = -remove; }
         increaseBudget(remove);
 
         return db.delete(tb_ENTRIES, id_ENTRIES + "=?", new String[] {String.valueOf(id)}) == 1;
