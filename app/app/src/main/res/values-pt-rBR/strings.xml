@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Expense tracker</string>
+    <string name="action_settings">Configurações</string>
+    <string name="new_transaction_header">Nova transação</string>
+    <string name="currency">R$</string>
+    <string name="confirm">Confirmar</string>
+    <string name="transaction_name_placeholder">Título</string>
+    <string name="dialog_edit_budget_title">Editar orçamento</string>
+    <string name="add">Adicionar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="edit">Editar</string>
+    <string name="theme">Tema</string>
+    <string name="ok">Ok</string>
+    <string name="choose_theme">Escolher tema</string>
+    <string name="budget">Orçamento:</string>
+    <string name="transactions">Transações</string>
+
+    <string-array name="arr_transaction_options">
+        <item>Despesa</item>
+        <item>Ganho</item>
+    </string-array>
+
+    <string-array name="arr_theme_options">
+        <item>Padrão do sistema</item>
+        <item>Claro</item>
+        <item>Escuro</item>
+    </string-array>
+
+    <string name="system_default">Padrão do sistema</string>
+    <string name="light">Claro</string>
+    <string name="dark">Escuro</string>
+
+</resources>
