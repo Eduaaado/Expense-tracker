@@ -1,6 +1,7 @@
 package com.example.expensestracker.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
         this.mViewHolder.chooseTheme = findViewById(R.id.area_theme);
         this.mViewHolder.txtThemeOption = findViewById(R.id.txt_theme_option);
 
-        // Set current options to View
-        SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        int idTheme = prefs.getInt("theme", 0);
-        String[] themestext = getResources().getStringArray(R.array.arr_theme_options);
-        this.mViewHolder.txtThemeOption.setText(themestext[idTheme]);
+        this.mViewHolder.chooseCurrency = findViewById(R.id.area_currency);
+        this.mViewHolder.txtCurrencyOption = findViewById(R.id.txt_currency_option);
 
         this.mViewHolder.chooseTheme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +38,28 @@ public class SettingsActivity extends AppCompatActivity {
                 newFragment.show(getSupportFragmentManager(), "theme");
             }
         });
+        this.mViewHolder.chooseCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, ChooseCurrencyActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Set current options to View
+
+        SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
+        this.mViewHolder.txtCurrencyOption.setText(prefs.getString("currency", getResources().getString(R.string.currency)));
+
+        int idTheme = prefs.getInt("theme", 0);
+        String[] themestext = getResources().getStringArray(R.array.arr_theme_options);
+        this.mViewHolder.txtThemeOption.setText(themestext[idTheme]);
     }
 
     /**
@@ -63,5 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static class ViewHolder {
         LinearLayout chooseTheme;
         TextView txtThemeOption;
+        LinearLayout chooseCurrency;
+        TextView txtCurrencyOption;
     }
 }

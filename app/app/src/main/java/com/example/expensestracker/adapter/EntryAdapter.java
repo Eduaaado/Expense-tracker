@@ -1,6 +1,7 @@
 package com.example.expensestracker.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,9 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
+
+        SharedPreferences prefs = mContext.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        mViewHolder.txtCurrency.setText(prefs.getString("currency", mContext.getResources().getString(R.string.currency)));
 
         mViewHolder.txtName.setText(details.name);
         mViewHolder.txtAmount.setText(details.amount);

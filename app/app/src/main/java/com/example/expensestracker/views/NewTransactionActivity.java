@@ -1,5 +1,7 @@
 package com.example.expensestracker.views;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +35,7 @@ public class NewTransactionActivity extends AppCompatActivity {
 
         this.mViewHolder.editTransTitle = findViewById(R.id.edit_transaction_title);
         this.mViewHolder.editTransAmount = findViewById(R.id.edit_transaction_amount);
+        this.mViewHolder.txtCurrency = findViewById(R.id.txt_transaction_currency);
         this.mViewHolder.spinTransType = findViewById(R.id.spin_transaction_type);
         this.mViewHolder.btnTransConfirm = findViewById(R.id.btn_transaction_confirm);
 
@@ -111,9 +115,18 @@ public class NewTransactionActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        this.mViewHolder.txtCurrency.setText(prefs.getString("currency", getResources().getString(R.string.currency)));
+    }
+
     private static class ViewHolder {
         EditText editTransTitle;
         EditText editTransAmount;
+        TextView txtCurrency;
         Spinner spinTransType;
         Button  btnTransConfirm;
     }

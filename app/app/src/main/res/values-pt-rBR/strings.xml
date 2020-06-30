@@ -30,4 +30,6 @@
     <string name="light">Claro</string>
     <string name="dark">Escuro</string>
 
+    <string name="str_currency">Moeda</string>
+
 </resources>

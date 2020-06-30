@@ -30,4 +30,6 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
 
+    <string name="str_currency">Currency</string>
+
 </resources>

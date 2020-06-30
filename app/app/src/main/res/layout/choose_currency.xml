@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/currency_option_dollar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorMain"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="$" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColorLight" />
+
+    <TextView
+        android:id="@+id/currency_option_euro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorMain"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="€" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColorLight" />
+
+    <TextView
+        android:id="@+id/currency_option_real"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorMain"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="R$" />
+
+</LinearLayout>

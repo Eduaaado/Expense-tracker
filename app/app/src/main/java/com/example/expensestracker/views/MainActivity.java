@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.txtBudgetDec = findViewById(R.id.txt_budget_decimal);
         this.mViewHolder.btnBudgetEdit = findViewById(R.id.btn_budget_edit);
         this.mViewHolder.lstTransactions = findViewById(R.id.list_transactions);
+        this.mViewHolder.txtCurrency = findViewById(R.id.txt_budget_currency);
 
         this.mViewHolder.fab = findViewById(R.id.fab);
 
@@ -95,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        this.mViewHolder.txtCurrency.setText(prefs.getString("currency", getResources().getString(R.string.currency)));
 
         updateBudgetDisplay();
 
@@ -181,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtBudgetInt;
         TextView txtBudgetDec;
         Button btnBudgetEdit;
-        Button btnBudgetAdd;
         ListView lstTransactions;
+        TextView txtCurrency;
     }
 }

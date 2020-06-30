@@ -2,7 +2,6 @@
 An android app you can use to keep tracking of your money expenses and incomes. You can log every transaction and set your budget to manage it.
 
 ## [Features](https://github.com/Eduaaado/Expense-tracker/releases)
-These features are all included in ```v1.0-alpha```
 
 * Transactions log with:
   * Title
@@ -14,6 +13,10 @@ These features are all included in ```v1.0-alpha```
   * System default
   * Light mode
   * Dark mode
+* Currency options
+  * $ (Dollar)
+  * € (Euro)
+  * R$ (Real)
 
 ## [License](https://github.com/Eduaaado/Expense-tracker/blob/master/LICENSE)
 MIT License

@@ -9,17 +9,43 @@
         android:id="@+id/area_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/theme"
             android:textSize="18sp"
             android:textColor="@color/textColorMain"/>
         <TextView
             android:id="@+id/txt_theme_option"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="[OPTION]"
+            android:textColor="@color/textColorLight"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/area_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_currency"
+            android:textSize="18sp"
+            android:textColor="@color/textColorMain"/>
+        <TextView
+            android:id="@+id/txt_currency_option"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="[OPTION]"
