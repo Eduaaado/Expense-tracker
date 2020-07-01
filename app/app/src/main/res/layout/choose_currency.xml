@@ -2,16 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical">
     <TextView
         android:id="@+id/currency_option_dollar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="$" />
+        android:padding="16dp"
+        android:text="Dollar ($)" />
 
     <View
         android:layout_width="match_parent"
@@ -23,9 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="€" />
+        android:padding="16dp"
+        android:text="Euro (€)" />
 
     <View
         android:layout_width="match_parent"
@@ -37,8 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="R$" />
+        android:padding="16dp"
+        android:text="Real (R$)" />
 
 </LinearLayout>

@@ -55,7 +55,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
-        this.mViewHolder.txtCurrencyOption.setText(prefs.getString("currency", getResources().getString(R.string.currency)));
+        String cur = prefs.getString("currency", getResources().getString(R.string.currency));
+
+        switch (cur) {
+            case "$": cur = "Dollar ($)"; break;
+            case "€": cur = "Euro (€)"; break;
+            case "R$": cur = "Real (R$)"; break;
+        }
+
+        this.mViewHolder.txtCurrencyOption.setText(cur);
 
         int idTheme = prefs.getInt("theme", 0);
         String[] themestext = getResources().getStringArray(R.array.arr_theme_options);

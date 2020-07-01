@@ -207,10 +207,12 @@ public class Database extends SQLiteOpenHelper {
         } cur.close();
 
         ContentValues vals = new ContentValues();
+        vals.put(tt_BUDGET, val);
         if (!empty) {
-            vals.put(tt_BUDGET, val);
             db.update(tb_BUDGET, vals, id_BUDGET + "=?", new String[] {"1"});
         } else {
+            vals.put(rt_BUDGET, 0);
+            vals.put(rp_BUDGET, 0);
             db.insert(tb_BUDGET, null, vals);
         }
 

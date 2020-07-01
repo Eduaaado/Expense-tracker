@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class editBudgetDialog extends DialogFragment {
         try {
             tt = String.valueOf(mDatabase.getTotalBudget());
         } catch (Exception e) {
-            tt = "0";
+            tt = "0.00";
         }
         amount.setText(tt);
 
@@ -92,6 +93,7 @@ public class editBudgetDialog extends DialogFragment {
                    public void onClick(DialogInterface dialog, int id) {
                        String txt = amount.getText().toString();
                        float i = Float.parseFloat(txt.replace(",",""));
+                       Log.d("EDIT", String.valueOf(i));
                        mDatabase.editBudget(i);
 
                        ((MainActivity)getActivity()).updateBudgetDisplay();
