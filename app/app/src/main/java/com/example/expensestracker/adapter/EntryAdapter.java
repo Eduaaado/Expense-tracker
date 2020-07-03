@@ -2,6 +2,7 @@ package com.example.expensestracker.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.example.expensestracker.R;
 import com.example.expensestracker.data.Database;
+import com.example.expensestracker.dialogBox.DeleteDialog;
+import com.example.expensestracker.dialogBox.editBudgetDialog;
 import com.example.expensestracker.views.MainActivity;
 
 import java.util.ArrayList;
@@ -83,9 +88,15 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             public void onClick(View v) {
                 int position = Integer.parseInt(String.valueOf(v.getTag()));
                 Log.d("POSITION", String.valueOf(position));
-                mDatabase.deleteEntry(position);
-                remove(details);
-                notifyDataSetChanged();
+
+                DialogFragment dialog = new DeleteDialog();
+
+                Bundle args = new Bundle();
+                args.putInt("position", position);
+                dialog.setArguments(args);
+
+                dialog.show(((MainActivity)mContext).getSupportFragmentManager(), "add budget");
+
                 ((MainActivity)mContext).updateBudgetDisplay();
             }
         });

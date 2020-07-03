@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -15,7 +16,7 @@ import com.example.expensestracker.views.MainActivity;
 public class DeleteDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Database mDatabase = new Database(getActivity());
+        final Database mDatabase = new Database(getActivity());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -23,13 +24,17 @@ public class DeleteDialog extends DialogFragment {
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        int position = getArguments().getInt("position");
+                        mDatabase.deleteEntry(position);
+                        ((MainActivity)getContext()).setAdapter();
+                        ((MainActivity)getContext()).updateBudgetDisplay();
+                        Toast.makeText(getActivity(), "Entry deleted", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dismiss();
                     }
                 });
         return builder.create();

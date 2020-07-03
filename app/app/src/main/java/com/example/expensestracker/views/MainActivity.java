@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
 
         updateBudgetDisplay();
 
+        setAdapter();
+    }
+
+    public void setAdapter() {
         String[][] entries = mDatabase.getEntries();
 
         // Construct the data source
