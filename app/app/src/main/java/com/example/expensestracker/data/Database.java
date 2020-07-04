@@ -177,6 +177,7 @@ public class Database extends SQLiteOpenHelper {
             cursor.close();
 
             float newtotal = total+val;
+            newtotal = (float) (Math.round(newtotal * 100.0) / 100.0);
             Log.d("NEW TOTAL", String.valueOf(newtotal));
             vals.put(tt_BUDGET, newtotal);
 
