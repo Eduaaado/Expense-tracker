@@ -21,14 +21,17 @@
 
         <activity
             android:name=".views.NewTransactionActivity"
+            android:parentActivityName=".views.MainActivity"
             android:label="@string/new_transaction_header"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".views.SettingsActivity"
+            android:parentActivityName=".views.MainActivity"
             android:label="@string/action_settings"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".views.ChooseCurrencyActivity"
+            android:parentActivityName=".views.SettingsActivity"
             android:label="@string/str_currency"
             android:theme="@style/AppTheme" />
     </application>

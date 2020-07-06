@@ -32,6 +32,7 @@ public class NewTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_transaction);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.mViewHolder.editTransTitle = findViewById(R.id.edit_transaction_title);
         this.mViewHolder.editTransAmount = findViewById(R.id.edit_transaction_amount);

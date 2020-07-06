@@ -23,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.mViewHolder.chooseTheme = findViewById(R.id.area_theme);
         this.mViewHolder.txtThemeOption = findViewById(R.id.txt_theme_option);

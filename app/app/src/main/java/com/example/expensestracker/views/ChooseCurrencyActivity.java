@@ -19,6 +19,7 @@ public class ChooseCurrencyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_currency);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         this.mViewHolder.txtDollar = findViewById(R.id.currency_option_dollar);
         this.mViewHolder.txtEuro = findViewById(R.id.currency_option_euro);
