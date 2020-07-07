@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="16dp"
         android:text="Dollar ($)" />
 
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="16dp"
         android:text="Euro (€)" />
 
@@ -34,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColorMain"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="16dp"
         android:text="Real (R$)" />
 
