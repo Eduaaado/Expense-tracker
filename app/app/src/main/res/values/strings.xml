@@ -31,5 +31,7 @@
     <string name="dark">Dark</string>
 
     <string name="str_currency">Currency</string>
+    <string name="fill_title">You have to fill title</string>
+    <string name="fill_amount">You have to fill amount</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -95,6 +96,13 @@ public class NewTransactionActivity extends AppCompatActivity {
                 String amount = mViewHolder.editTransAmount.getText().toString();
                 String type = String.valueOf(mViewHolder.spinTransType.getSelectedItemId());
 
+                if (title.matches("")) {
+                    Toast.makeText(NewTransactionActivity.this, R.string.fill_title, Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (amount.matches("") || amount.matches("0.00")) {
+                    Toast.makeText(NewTransactionActivity.this, R.string.fill_amount, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Log new transaction
                 mDatabase.addEntry(title, amount, type);
 
