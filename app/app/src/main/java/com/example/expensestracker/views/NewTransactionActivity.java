@@ -123,7 +123,17 @@ public class NewTransactionActivity extends AppCompatActivity {
                 new TimePickerDialog(NewTransactionActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        mViewHolder.editTransTime.setText( selectedHour + ":" + selectedMinute);
+                        String minute;
+                        String hour;
+                        if (String.valueOf(selectedMinute).length() == 1) {
+                            minute = "0"+selectedMinute;
+                        } else { minute = String.valueOf(selectedMinute); }
+
+                        if (String.valueOf(selectedHour).length() == 1) {
+                            hour = "0"+selectedHour;
+                        } else { hour = String.valueOf(selectedMinute); }
+
+                        mViewHolder.editTransTime.setText( hour + ":" + minute);
                     }
                 }, hour, minute, true).show();
             }
