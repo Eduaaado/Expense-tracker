@@ -34,5 +34,7 @@
     <string name="fill_title">You have to fill title</string>
     <string name="fill_amount">You have to fill amount</string>
     <string name="amount">amount</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
 
 </resources>

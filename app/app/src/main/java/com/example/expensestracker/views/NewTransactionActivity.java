@@ -1,5 +1,7 @@
 package com.example.expensestracker.views;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,9 +10,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +26,7 @@ import com.example.expensestracker.data.Database;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class NewTransactionActivity extends AppCompatActivity {
@@ -39,6 +44,8 @@ public class NewTransactionActivity extends AppCompatActivity {
         this.mViewHolder.editTransAmount = findViewById(R.id.edit_transaction_amount);
         this.mViewHolder.txtCurrency = findViewById(R.id.txt_transaction_currency);
         this.mViewHolder.spinTransType = findViewById(R.id.spin_transaction_type);
+        this.mViewHolder.editTransDate = findViewById(R.id.edit_transaction_date);
+        this.mViewHolder.editTransTime = findViewById(R.id.edit_transaction_time);
         this.mViewHolder.btnTransConfirm = findViewById(R.id.btn_transaction_confirm);
 
         // Format Edit area to money format ($X.yy)
@@ -87,6 +94,41 @@ public class NewTransactionActivity extends AppCompatActivity {
             }
         });
 
+        this.mViewHolder.editTransDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+
+                // Date picker
+                new DatePickerDialog(NewTransactionActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                mViewHolder.editTransDate.setText(dayOfMonth+"/"+month+"/"+year);
+                            }
+                        }, year, month, day).show();
+            }
+        });
+
+        this.mViewHolder.editTransTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR);
+                int minute = cldr.get(Calendar.MINUTE);
+
+                new TimePickerDialog(NewTransactionActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        mViewHolder.editTransTime.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true).show();
+            }
+        });
+
         this.mViewHolder.btnTransConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +137,8 @@ public class NewTransactionActivity extends AppCompatActivity {
                 String title = mViewHolder.editTransTitle.getText().toString();
                 String amount = mViewHolder.editTransAmount.getText().toString();
                 String type = String.valueOf(mViewHolder.spinTransType.getSelectedItemId());
+                String date = mViewHolder.editTransDate.getText().toString();
+                String time = mViewHolder.editTransTime.getText().toString();
 
                 if (title.matches("")) {
                     Toast.makeText(NewTransactionActivity.this, R.string.fill_title, Toast.LENGTH_SHORT).show();
@@ -104,7 +148,7 @@ public class NewTransactionActivity extends AppCompatActivity {
                     return;
                 }
                 // Log new transaction
-                mDatabase.addEntry(title, amount, type);
+                mDatabase.addEntry(title, amount, type, date, time);
 
                 // Remove any unnecessary char
                 float add = Float.parseFloat(amount.replace(",",""));
@@ -137,6 +181,8 @@ public class NewTransactionActivity extends AppCompatActivity {
         EditText editTransAmount;
         TextView txtCurrency;
         Spinner spinTransType;
-        Button  btnTransConfirm;
+        EditText editTransDate;
+        EditText editTransTime;
+        Button btnTransConfirm;
     }
 }

@@ -78,15 +78,15 @@ public class Database extends SQLiteOpenHelper {
      * @return boolean Returns {@code true} if successfully inserted
      */
 
-    public boolean addEntry(String name, String amount, String type) {
+    public boolean addEntry(String name, String amount, String type, String date, String time) {
         ContentValues vals = new ContentValues();
         vals.put(nm_ENTRIES, name);
         vals.put(rs_ENTRIES, amount);
         vals.put(tp_ENTRIES, type);
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-        vals.put(tm_ENTRIES, sdf.format(c.getTime()));
+        //Calendar c = Calendar.getInstance();
+        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        vals.put(tm_ENTRIES, (time+" "+date));
 
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(tb_ENTRIES, null, vals) == 1;

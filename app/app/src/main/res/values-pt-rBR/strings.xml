@@ -34,5 +34,7 @@
     <string name="fill_title">Você precisa preencher o título</string>
     <string name="fill_amount">Você precisa preencher a quantidade</string>
     <string name="amount">quantia</string>
+    <string name="time">Horário</string>
+    <string name="date">Data</string>
 
 </resources>
