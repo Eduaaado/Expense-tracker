@@ -19,6 +19,9 @@ import com.example.expensestracker.dialogBox.DeleteDialog;
 import com.example.expensestracker.dialogBox.editBudgetDialog;
 import com.example.expensestracker.views.MainActivity;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -78,7 +81,17 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             mViewHolder.txtType.setText("Income");
         }
 
-        mViewHolder.txtTime.setText(details.time);
+        DateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        String time = null;
+        try {
+            Date d = original.parse(details.time);
+            time = target.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        mViewHolder.txtTime.setText(time);
 
         String[][] entries = mDatabase.getEntries();
 

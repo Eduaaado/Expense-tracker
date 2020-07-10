@@ -23,10 +23,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.expensestracker.R;
 import com.example.expensestracker.data.Database;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class NewTransactionActivity extends AppCompatActivity {
@@ -163,19 +167,19 @@ public class NewTransactionActivity extends AppCompatActivity {
                     date = c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
                 }
                 if (time.equals("")) {
-                    String h = String.valueOf(c.get(Calendar.HOUR));
-                    if (h.length() == 1) {
-                        h = "0"+h;
-                    }
-                    String m = String.valueOf(c.get(Calendar.MINUTE));
-                    if (m.length() == 1) {
-                        m = "0"+m;
-                    }
-                    time = h+":"+m;
+                    time = c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE);
+                }
+                DateFormat original = new SimpleDateFormat("H:m d/m/yyyy");
+                DateFormat target = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    Date d = original.parse(time+" "+date);
+                    time = target.format(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
 
                 // Log new transaction
-                mDatabase.addEntry(title, amount, type, date, time);
+                mDatabase.addEntry(title, amount, type, time);
 
                 // Remove any unnecessary char
                 float add = Float.parseFloat(amount.replace(",",""));

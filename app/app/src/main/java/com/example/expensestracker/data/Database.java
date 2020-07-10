@@ -78,12 +78,12 @@ public class Database extends SQLiteOpenHelper {
      * @return boolean Returns {@code true} if successfully inserted
      */
 
-    public boolean addEntry(String name, String amount, String type, String date, String time) {
+    public boolean addEntry(String name, String amount, String type, String time) {
         ContentValues vals = new ContentValues();
         vals.put(nm_ENTRIES, name);
         vals.put(rs_ENTRIES, amount);
         vals.put(tp_ENTRIES, type);
-        vals.put(tm_ENTRIES, (time+" "+date));
+        vals.put(tm_ENTRIES, time);
 
         SQLiteDatabase db = getWritableDatabase();
         return db.insert(tb_ENTRIES, null, vals) == 1;
@@ -102,7 +102,7 @@ public class Database extends SQLiteOpenHelper {
         String[][] entry = new String[0][];
         String[] details;
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tb_ENTRIES+" ORDER BY datetime("+tm_ENTRIES+")", null);
         if (cursor.moveToLast()) {
             do {
                 details = new String[] {cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(0)};
