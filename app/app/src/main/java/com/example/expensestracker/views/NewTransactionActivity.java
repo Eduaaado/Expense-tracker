@@ -157,6 +157,23 @@ public class NewTransactionActivity extends AppCompatActivity {
                     Toast.makeText(NewTransactionActivity.this, R.string.fill_amount, Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                Calendar c = Calendar.getInstance();
+                if (date.equals("")) {
+                    date = c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+                }
+                if (time.equals("")) {
+                    String h = String.valueOf(c.get(Calendar.HOUR));
+                    if (h.length() == 1) {
+                        h = "0"+h;
+                    }
+                    String m = String.valueOf(c.get(Calendar.MINUTE));
+                    if (m.length() == 1) {
+                        m = "0"+m;
+                    }
+                    time = h+":"+m;
+                }
+
                 // Log new transaction
                 mDatabase.addEntry(title, amount, type, date, time);
 

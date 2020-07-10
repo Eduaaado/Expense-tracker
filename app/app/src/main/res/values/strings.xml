@@ -36,5 +36,7 @@
     <string name="amount">amount</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
+    <string name="now">Now</string>
+    <string name="today">Today</string>
 
 </resources>

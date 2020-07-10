@@ -83,9 +83,6 @@ public class Database extends SQLiteOpenHelper {
         vals.put(nm_ENTRIES, name);
         vals.put(rs_ENTRIES, amount);
         vals.put(tp_ENTRIES, type);
-
-        //Calendar c = Calendar.getInstance();
-        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         vals.put(tm_ENTRIES, (time+" "+date));
 
         SQLiteDatabase db = getWritableDatabase();

@@ -36,5 +36,7 @@
     <string name="amount">quantia</string>
     <string name="time">Horário</string>
     <string name="date">Data</string>
+    <string name="now">Agora</string>
+    <string name="today">Hoje</string>
 
 </resources>
