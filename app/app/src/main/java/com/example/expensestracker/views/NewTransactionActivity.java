@@ -127,17 +127,15 @@ public class NewTransactionActivity extends AppCompatActivity {
                 new TimePickerDialog(NewTransactionActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        String minute;
-                        String hour;
-                        if (String.valueOf(selectedMinute).length() == 1) {
-                            minute = "0"+selectedMinute;
-                        } else { minute = String.valueOf(selectedMinute); }
-
-                        if (String.valueOf(selectedHour).length() == 1) {
-                            hour = "0"+selectedHour;
-                        } else { hour = String.valueOf(selectedMinute); }
-
-                        mViewHolder.editTransTime.setText( hour + ":" + minute);
+                        SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+                        String time = null;
+                        try {
+                            Date d = timeformat.parse(selectedHour+":"+selectedMinute);
+                            time = timeformat.format(d);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        mViewHolder.editTransTime.setText(time);
                     }
                 }, hour, minute, true).show();
             }
@@ -167,12 +165,12 @@ public class NewTransactionActivity extends AppCompatActivity {
                     date = c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
                 }
                 if (time.equals("")) {
-                    time = c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE);
+                    time = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
                 }
-                DateFormat original = new SimpleDateFormat("H:m d/m/yyyy");
-                DateFormat target = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat originalFormat = new SimpleDateFormat("HH:mm d/M/yyyy");
+                SimpleDateFormat target = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
                 try {
-                    Date d = original.parse(time+" "+date);
+                    Date d = originalFormat.parse(time+" "+date);
                     time = target.format(d);
                 } catch (ParseException e) {
                     e.printStackTrace();

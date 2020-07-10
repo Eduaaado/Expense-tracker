@@ -81,8 +81,8 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             mViewHolder.txtType.setText("Income");
         }
 
-        DateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        DateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         String time = null;
         try {
             Date d = original.parse(details.time);
