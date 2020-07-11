@@ -11,10 +11,8 @@ import com.example.expensestracker.adapter.EntryDetails;
 import com.example.expensestracker.data.Database;
 import com.example.expensestracker.dialogBox.editBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import android.view.View;
@@ -23,7 +21,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 /**
