@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.expensestracker.R;
 
-public class ChooseCurrencyActivity extends AppCompatActivity {
+public class ChooseCurrencyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
@@ -25,25 +25,24 @@ public class ChooseCurrencyActivity extends AppCompatActivity {
         this.mViewHolder.txtEuro = findViewById(R.id.currency_option_euro);
         this.mViewHolder.txtReal = findViewById(R.id.currency_option_real);
 
-        this.mViewHolder.txtDollar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeCurrency("$");
-            }
-        });
-        this.mViewHolder.txtEuro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeCurrency("€");
-            }
-        });
-        this.mViewHolder.txtReal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeCurrency("R$");
-            }
-        });
+        this.mViewHolder.txtDollar.setOnClickListener(this);
+        this.mViewHolder.txtEuro.setOnClickListener(this);
+        this.mViewHolder.txtReal.setOnClickListener(this);
 
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.currency_option_dollar:
+                ChangeCurrency("$");
+                break;
+            case R.id.currency_option_euro:
+                ChangeCurrency("€");
+                break;
+            case R.id.currency_option_real:
+                ChangeCurrency("R$");
+                break;
+        }
     }
 
     private void ChangeCurrency(String currency) {
