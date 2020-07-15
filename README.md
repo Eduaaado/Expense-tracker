@@ -1,5 +1,5 @@
 # Expenses-tracker
-An android app you can use to keep tracking of your money expenses and incomes. You can log every transaction and set your budget to manage it.
+An android app you can use to keep tracking of your money expenses and incomes. You can log every transaction and set your budget to manage it. Here you can log your expenses and incomes, setting name, amount, type (expense/income), date and time! 
 
 ## [Features](https://github.com/Eduaaado/Expense-tracker/releases)
 
@@ -35,7 +35,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 
 ## [Versioning](https://semver.org/)
 This repository follows ```Semantic Versioning 2.0``` rules set.
