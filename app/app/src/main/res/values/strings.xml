@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Expense tracker</string>
+    <string name="app_name">Expenses</string>
     <string name="action_settings">Settings</string>
     <string name="new_transaction_header">New transaction</string>
     <string name="currency">$</string>

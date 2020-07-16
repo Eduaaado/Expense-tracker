@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Expense tracker</string>
+    <string name="app_name">Despesas</string>
     <string name="action_settings">Configurações</string>
     <string name="new_transaction_header">Nova transação</string>
     <string name="currency">R$</string>
