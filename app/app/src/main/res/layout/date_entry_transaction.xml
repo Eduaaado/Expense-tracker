@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txt_entry_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryLight"
+        android:textStyle="bold"
+        android:text="DD/MM"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_entry_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorMain"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="Name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryLight"
+            android:text="•" />
+
+        <TextView
+            android:id="@+id/txt_entry_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textColor="@color/textColorLight"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_entry_currencysymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorLight"
+            android:textSize="12sp"
+            android:text="@string/currency" />
+
+        <TextView
+            android:id="@+id/txt_entry_amount"
+            android:layout_weight="2"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Amount" />
+
+        <TextView
+            android:id="@+id/txt_entry_type"
+            android:layout_weight="1"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorLight"
+            android:text="Type" />
+
+        <Button
+            android:id="@+id/btn_entry_delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_delete_24"
+            android:backgroundTint="@color/colorPrimaryLight"/>
+
+    </LinearLayout>
+
+</LinearLayout>

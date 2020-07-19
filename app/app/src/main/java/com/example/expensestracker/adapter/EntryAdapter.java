@@ -36,6 +36,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         TextView txtAmount;
         TextView txtType;
         TextView txtTime;
+        TextView txtDate;
         Button btnDelete;
     }
 
@@ -49,10 +50,42 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
     public View getView(int position, View convertView, ViewGroup parent) {
         final EntryDetails details = getItem(position);
 
+        SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat dayform = new SimpleDateFormat("dd");
+        SimpleDateFormat daymonthform = new SimpleDateFormat("dd/MM");
+        String time = null;
+        int day = -1;
+        String daymonth = null;
+
+        try {
+            Date d = original.parse(details.time);
+            time = target.format(d);
+            day = Integer.parseInt(dayform.format(d));
+            daymonth = daymonthform.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SharedPreferences prefs = mContext.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
         ViewHolder mViewHolder;
         if (convertView == null) {
             mViewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_entry_transaction, parent, false);
+            if (day == prefs.getInt("lastday", day-1)) {
+                Log.d("DAY", "IS EQUALS");
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_entry_transaction, parent, false);
+            } else {
+                Log.d("DAY", "IS NOT EQUALS");
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.date_entry_transaction, parent, false);
+
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("lastday", day);
+                editor.apply();
+
+                mViewHolder.txtDate = convertView.findViewById(R.id.txt_entry_date);
+                mViewHolder.txtDate.setText(daymonth);
+            }
 
             mViewHolder.txtName = convertView.findViewById(R.id.txt_entry_name);
             mViewHolder.txtCurrency = convertView.findViewById(R.id.txt_entry_currencysymbol);
@@ -66,7 +99,6 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
 
-        SharedPreferences prefs = mContext.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         mViewHolder.txtCurrency.setText(prefs.getString("currency", mContext.getResources().getString(R.string.currency)));
 
         mViewHolder.txtName.setText(details.name);
@@ -79,16 +111,6 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         } else {
             mViewHolder.txtCurrency.setText(txtCurr.replace("-",""));
             mViewHolder.txtType.setText("Income");
-        }
-
-        SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-        String time = null;
-        try {
-            Date d = original.parse(details.time);
-            time = target.format(d);
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
         mViewHolder.txtTime.setText(time);
