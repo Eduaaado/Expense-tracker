@@ -108,7 +108,7 @@ public class NewTransactionActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                mViewHolder.editTransDate.setText(dayOfMonth+"/"+month+"/"+year);
+                                mViewHolder.editTransDate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
                             }
                         }, year, month, day).show();
             }
