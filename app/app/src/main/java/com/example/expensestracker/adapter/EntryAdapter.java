@@ -55,15 +55,18 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         SimpleDateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         SimpleDateFormat dayform = new SimpleDateFormat("dd");
         SimpleDateFormat daymonthform = new SimpleDateFormat("dd/MM");
+        SimpleDateFormat yearform = new SimpleDateFormat("yyyy");
         String time = null;
         int day = -1;
         String daymonth = null;
+        int year = -1;
 
         try {
             Date d = original.parse(details.time);
             time = target.format(d);
             day = Integer.parseInt(dayform.format(d));
             daymonth = daymonthform.format(d);
+            year = Integer.parseInt(yearform.format(d));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -73,21 +76,27 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         ViewHolder mViewHolder;
         if (convertView == null) {
             mViewHolder = new ViewHolder();
-            if (day == prefs.getInt("lastday", day-1)) {
+            if (day == prefs.getInt("lastday", day-1) || day == prefs.getInt("lastyear", year)) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_entry_transaction, parent, false);
             } else {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.date_entry_transaction, parent, false);
 
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt("lastday", day);
+                editor.putInt("lastyear", year);
                 editor.apply();
 
-                int todaydate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
                 String txt = daymonth;
-                if (day == todaydate) {
-                    txt = this.mContext.getResources().getString(R.string.today);
-                } else if (day == todaydate-1) {
-                    txt = this.mContext.getResources().getString(R.string.yesterday);
+                Calendar cal = Calendar.getInstance();
+                if (cal.get(Calendar.YEAR) == year) {
+                    int todaydate = cal.get(Calendar.DAY_OF_MONTH);
+                    if (day == todaydate) {
+                        txt = this.mContext.getResources().getString(R.string.today);
+                    } else if (day == todaydate - 1) {
+                        txt = this.mContext.getResources().getString(R.string.yesterday);
+                    }
+                } else {
+                    txt = daymonth+"/"+year;
                 }
 
                 mViewHolder.txtDate = convertView.findViewById(R.id.txt_entry_date);

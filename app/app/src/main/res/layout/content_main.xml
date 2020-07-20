@@ -66,7 +66,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/transactions"
         android:textColor="@color/textColorMain"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="6dp"
         android:textSize="24sp" />
 
     <ListView
