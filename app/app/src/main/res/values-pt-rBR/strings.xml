@@ -38,5 +38,6 @@
     <string name="date">Data</string>
     <string name="now">Agora</string>
     <string name="today">Hoje</string>
+    <string name="yesterday">Ontem</string>
 
 </resources>

@@ -23,6 +23,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EntryAdapter extends ArrayAdapter<EntryDetails> {
@@ -73,18 +74,24 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         if (convertView == null) {
             mViewHolder = new ViewHolder();
             if (day == prefs.getInt("lastday", day-1)) {
-                Log.d("DAY", "IS EQUALS");
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_entry_transaction, parent, false);
             } else {
-                Log.d("DAY", "IS NOT EQUALS");
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.date_entry_transaction, parent, false);
 
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt("lastday", day);
                 editor.apply();
 
+                int todaydate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                String txt = daymonth;
+                if (day == todaydate) {
+                    txt = this.mContext.getResources().getString(R.string.today);
+                } else if (day == todaydate-1) {
+                    txt = this.mContext.getResources().getString(R.string.yesterday);
+                }
+
                 mViewHolder.txtDate = convertView.findViewById(R.id.txt_entry_date);
-                mViewHolder.txtDate.setText(daymonth);
+                mViewHolder.txtDate.setText(txt);
             }
 
             mViewHolder.txtName = convertView.findViewById(R.id.txt_entry_name);

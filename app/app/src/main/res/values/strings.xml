@@ -38,5 +38,6 @@
     <string name="date">Date</string>
     <string name="now">Now</string>
     <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
 
 </resources>
