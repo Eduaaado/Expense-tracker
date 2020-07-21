@@ -52,7 +52,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         final EntryDetails details = getItem(position);
 
         SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat target = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat target = new SimpleDateFormat("HH:mm");
         SimpleDateFormat dayform = new SimpleDateFormat("dd");
         SimpleDateFormat daymonthform = new SimpleDateFormat("dd/MM");
         SimpleDateFormat yearform = new SimpleDateFormat("yyyy");
