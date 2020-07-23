@@ -56,9 +56,13 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
         SimpleDateFormat dayform = new SimpleDateFormat("dd");
         SimpleDateFormat daymonthform = new SimpleDateFormat("dd/MM");
         SimpleDateFormat yearform = new SimpleDateFormat("yyyy");
+        SimpleDateFormat textformyear = new SimpleDateFormat("MMMM dd, yyyy");
+        SimpleDateFormat textform = new SimpleDateFormat("MMMM dd");
         String time = null;
         int day = -1;
         String daymonth = null;
+        String textformatted = null;
+        String textformattedyear = null;
         int year = -1;
 
         try {
@@ -67,6 +71,8 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
             day = Integer.parseInt(dayform.format(d));
             daymonth = daymonthform.format(d);
             year = Integer.parseInt(yearform.format(d));
+            textformatted = textform.format(d);
+            textformattedyear = textformyear.format(d);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -86,7 +92,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
                 editor.putInt("lastyear", year);
                 editor.apply();
 
-                String txt = daymonth;
+                String txt = textformatted;
                 Calendar cal = Calendar.getInstance();
                 if (cal.get(Calendar.YEAR) == year) {
                     int todaydate = cal.get(Calendar.DAY_OF_MONTH);
@@ -96,7 +102,7 @@ public class EntryAdapter extends ArrayAdapter<EntryDetails> {
                         txt = this.mContext.getResources().getString(R.string.yesterday);
                     }
                 } else {
-                    txt = daymonth+"/"+year;
+                    txt = textformattedyear;
                 }
 
                 mViewHolder.txtDate = convertView.findViewById(R.id.txt_entry_date);

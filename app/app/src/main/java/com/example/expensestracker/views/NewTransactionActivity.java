@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -159,7 +160,8 @@ public class NewTransactionActivity extends AppCompatActivity {
 
                 Calendar c = Calendar.getInstance();
                 if (date.equals("")) {
-                    date = c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+                    date = c.get(Calendar.DAY_OF_MONTH)+"/"+(c.get(Calendar.MONTH)+1)+"/"+c.get(Calendar.YEAR);
+                    Log.d("aA", date);
                 }
                 if (time.equals("")) {
                     time = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
