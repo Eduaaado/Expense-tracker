@@ -4,7 +4,6 @@ An android app you can use to keep tracking of your money expenses and incomes. 
 ## [Features](https://github.com/Eduaaado/Expense-tracker/releases)
 
 * Transactions log
-  * Date modification
 * Delete entries
 * Edit budget
 * Theme options
