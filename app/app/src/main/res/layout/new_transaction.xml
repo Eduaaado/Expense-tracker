@@ -45,12 +45,21 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:paddingHorizontal="2dp"
+                android:background="@color/background"
+                android:elevation="1dp"
+                android:text="@string/amount"
+                android:textColor="@color/textColorLight"/>
+
+            <TextView
                 android:id="@+id/txt_transaction_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:paddingTop="2dp"
                 android:text="@string/currency"
                 android:textColor="@color/textColorLight" />
@@ -59,8 +68,8 @@
                 android:id="@+id/edit_transaction_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
                 android:background="@drawable/edittext"
-                android:hint="@string/amount"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:paddingVertical="12dp"
@@ -68,15 +77,29 @@
                 android:paddingStart="30dp" />
 
         </RelativeLayout>
-        <Spinner
-            android:id="@+id/spin_transaction_type"
+        <RelativeLayout
             android:layout_weight="1"
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/edittext"
-            android:padding="12dp"
-            android:layout_marginStart="6dp"
-            android:entries="@array/arr_transaction_options"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:paddingHorizontal="2dp"
+                android:background="@color/background"
+                android:elevation="1dp"
+                android:text="@string/type"
+                android:textColor="@color/textColorLight"/>
+            <Spinner
+                android:id="@+id/spin_transaction_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="12dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="6dp"
+                android:entries="@array/arr_transaction_options"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <View

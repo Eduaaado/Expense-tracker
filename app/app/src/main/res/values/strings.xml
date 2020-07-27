@@ -33,11 +33,12 @@
     <string name="str_currency">Currency</string>
     <string name="fill_title">You have to fill title</string>
     <string name="fill_amount">You have to fill amount</string>
-    <string name="amount">amount</string>
+    <string name="amount">Amount</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="now">Now</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
+    <string name="type">Type</string>
 
 </resources>
