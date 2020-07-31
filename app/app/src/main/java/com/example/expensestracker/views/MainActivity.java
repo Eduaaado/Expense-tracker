@@ -11,6 +11,7 @@ import com.example.expensestracker.adapter.EntryDetails;
 import com.example.expensestracker.data.Database;
 import com.example.expensestracker.dialogBox.editBudgetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 /**
@@ -32,7 +34,7 @@ import java.util.ArrayList;
  * feel free to open an Issue reporting any error or request a feature.
  *
  * @author Eduardo Rodrigues
- * @version 1.0.0-alpha
+ * @version 1.4.2-alpha
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         this.mViewHolder.txtCurrency = findViewById(R.id.txt_budget_currency);
 
         this.mViewHolder.fab = findViewById(R.id.fab);
-
 
         // Click events
 
